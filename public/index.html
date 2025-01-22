@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Websocket chat</title>
+
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+
+    <h1>Websocket chat</h1>
+
+    <!-- förvalt i webbläsare återger canvas element 300 x 150 -->
+    <!-- ska applikationen använda en annan storlek ange width och height attribut samt mosvarande värden i CSS  -->
+    <canvas></canvas>
+
+    <form action="" id="userForm">
+        <label for="user">Ditt namn:</label>
+        <input type="text" id="user" name="user" required>
+        <input type="submit" value="Spara">
+    </form>
+
+    <form action="" class="hidden" id="messageForm">
+        <label for="message">Text:</label>
+        <input type="text" id="message" name="message" required>
+        <input type="submit" value="Skicka">
+    </form>
+
+    <div id="chat"></div>
+
+    <!-- om import av moduler används - ange attributet type -->
+    <script src="scripts/code.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+label {
+    display: block;
+}
+
+div#chat {
+    min-height: 1rem;
+    background-color: lightgray;
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px dotted #eee;
+}
+
+form {
+    margin: 1rem 0
+}
+
+.hidden {
+    display: none;
+}
+
+input {
+    padding: .5rem
+}
+
+canvas {
+    border: 1px solid #999;
+    background-color: #333;
+}
