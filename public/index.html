@@ -4,35 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Websocket chat</title>
+    <title>Duck Doodle</title>
 
     <link rel="stylesheet" href="styles/style.css">
 </head>
 
 <body>
+    <div class="start-box">
+        <img src="./img/logo.png" alt="logo" class="logo">
+        <h1>DAGS ATT SPELA DUCK DOODLE!</h1>
+        <p>Ange ditt namn för att starta spelet. Du ritar eller gissar. Gissa i chatten, har du rätt vinner du.</p>
+    </div>
 
-    <h1>Websocket chat</h1>
+    <canvas id="drawingCanvas" width="400" height="250" style="border:1px solid black;"></canvas>
 
-    <!-- förvalt i webbläsare återger canvas element 300 x 150 -->
-    <!-- ska applikationen använda en annan storlek ange width och height attribut samt mosvarande värden i CSS  -->
-    <canvas></canvas>
-
+    <div class="chat-box">
+        <p>ditt namn:</p>
+        <input type="text" class="name-text">
+        <div>
+            <button class="sucess-btn">START</button>
+        </div>
+    </div>
+<div>
+    <label for="guessInput">jag tror det är...</label>
+  <input type="text" id="guessInput" placeholder="Skriv vad du tror här">
+  <button id="submitGuess-btn">Gissa Doodle</button>
+</div>
     <form action="" id="userForm">
-        <label for="user">Ditt namn:</label>
+        <label for="user">Spelarnamn:</label>
         <input type="text" id="user" name="user" required>
         <input type="submit" value="Spara">
     </form>
 
     <form action="" class="hidden" id="messageForm">
-        <label for="message">Text:</label>
+        <label for="message">Gissa bilden:</label>
         <input type="text" id="message" name="message" required>
         <input type="submit" value="Skicka">
     </form>
 
+    <button id="resetButton">En gång till!</button>
+
     <div id="chat"></div>
 
+
     <!-- om import av moduler används - ange attributet type -->
+    <script src="scripts/paint.js" type="module"></script>
     <script src="scripts/code.js" type="module"></script>
+
 </body>
 
 </html>
