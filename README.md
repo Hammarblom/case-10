@@ -1,4 +1,5 @@
-# Websocket
+# Case 10 - Case-Websocket-Canvas
+
 
 Installera projektet genom att köra följande kommado i terminalen:
 
@@ -23,4 +24,4 @@ node server.js
 
 `http://localhost:8082`
 
-Eftersom de är en socket applikation bör flera webbläsare ansluta.
+Eftersom de är en socket applikation bör flera webbläsare ansluta för att få hela spelupplevelsen.
