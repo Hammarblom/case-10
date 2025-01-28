@@ -1,14 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root {
+    --green: #A2C38A;
+    --red: #BB1B1B;
+    --pink: #E89C9E;
+    --yellow: #F4BA2D;
+    --white: #FFFCF3;
+
+}
+
 body {
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: "Poppins", serif;
+    font-weight: 900;
+    font-style: normal;
+    background-color: var(--green);
+}
+
+.start-box {
+    color: var(--white);
+    text-align: center;
+
+}
+
+.chat-box {
+    background-color: var(--red);
+    border-radius: 20px;
+    color: var(--white);
+    padding: 1rem;
+    text-align: center;
+}
+
+.logo {
+    height: 150px;
 }
 
 label {
     display: block;
+    color: var(--white)
 }
 
 div#chat {
-    min-height: 1rem;
-    background-color: lightgray;
+    min-height: 5rem;
+    background-color: lightcoral;
+    color: white;
     margin: 2rem 0;
     padding: 1rem;
     border: 1px dotted #eee;
@@ -27,6 +61,28 @@ input {
 }
 
 canvas {
-    border: 1px solid #999;
-    background-color: #333;
+    border: 1px solid wheat;
+    border-radius: 20px;
+    background-color: var(--white);
+    text-align: center;
+}
+
+.sucess-btn {
+    color: white;
+    background-color: lightgreen;
+    padding: 1rem;
+    font-size: 14px;
+    font-weight: 800;
+    border-radius: 6px;
+    border-color: wheat;
+}
+
+.submitGuess-btn {
+    color: var(--yellow);
+    background-color: var(#BB1B1B);
+    padding: 1rem;
+    font-size: 14px;
+    font-weight: 800;
+    border-radius: 6px;
+    border-color: wheat;
 }
