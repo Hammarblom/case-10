@@ -98,3 +98,16 @@ function renderChatMessage(obj) {
     // vilken metod kan användas för att placera element först...
     chat.prepend(div);
 }
+
+websocket.onmessage = function(event) {
+    let data = JSON.parse(event.data);
+  
+    if (data.type === "draw") {
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.lineTo(data.x, data.y);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(data.x, data.y);
+    }
+  };
