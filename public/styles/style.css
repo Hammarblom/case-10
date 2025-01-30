@@ -71,8 +71,6 @@ canvas {
 }
 
 #drawingcanvas {
-    width:600; 
-    height:250;
     border:1px solid black;
 }
 
