@@ -28,7 +28,7 @@ import { Circle } from "./Circle.js";
 const circles = [];
 
 const myCanvas = new MyCanvas(canvas, ctx);
-myCanvas.drawCircle(canvas.width / 2, canvas.height / 2, 5, "green");
+// myCanvas.drawCircle(canvas.width / 2, canvas.height / 2, 5, "green");
 
 
 

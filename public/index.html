@@ -16,7 +16,7 @@
         <p>Ange ditt namn för att starta spelet. Du ritar eller gissar. Gissa i chatten, har du rätt vinner du.</p>
     </div>
 
-    <canvas id="drawingCanvas" width="400" height="250" style="border:1px solid black;"></canvas>
+    <canvas id="drawingCanvas"></canvas>
 
     <div class="chat-box">
         <p>ditt namn:</p>
@@ -25,11 +25,13 @@
             <button class="sucess-btn">START</button>
         </div>
     </div>
-<div>
-    <label for="guessInput">jag tror det är...</label>
-  <input type="text" id="guessInput" placeholder="Skriv vad du tror här">
-  <button id="submitGuess-btn">Gissa Doodle</button>
-</div>
+
+    <div>
+        <label for="guessInput">jag tror det är...</label>
+        <input type="text" id="guessInput" placeholder="Skriv vad du tror här">
+        <button id="submitGuess-btn">Gissa Doodle</button>
+    </div>
+    
     <form action="" id="userForm">
         <label for="user">Spelarnamn:</label>
         <input type="text" id="user" name="user" required>
@@ -42,12 +44,11 @@
         <input type="submit" value="Skicka">
     </form>
 
-    <button id="resetButton">En gång till!</button>
+    <!-- <button id="resetButton">En gång till!</button> -->
 
     <div id="chat"></div>
 
-
-    <!-- om import av moduler används - ange attributet type -->
+    <!-- om import av moduler som används  -->
     <script src="scripts/paint.js" type="module"></script>
     <script src="scripts/code.js" type="module"></script>
 
