@@ -1,19 +1,18 @@
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 let isDrawing = false;
-let role = "guesser"; // Standardroll tills vi får en roll från servern
+let role = null; // Uppdateras från servern!
 const websocket = new WebSocket("ws://localhost:8082");
 
-// Lyssna på rolltilldelning från servern
 websocket.onmessage = function(event) {
     let data = JSON.parse(event.data);
     
     if (data.type === "role") {
-        role = data.role;
-        console.log(`Du är en: ${role}`);
+        role = data.role; // Uppdatera spelarens roll
+        document.getElementById("roleMessage").innerText = `Du är en: ${role === "drawer" ? "Ritare 🎨" : "Gissare 🤔"}`;
     }
 
-    if (data.type === "draw") {
+    if (data.type === "draw" && role !== "drawer") {
         drawLine(data.x, data.y);
     }
 };

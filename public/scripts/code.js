@@ -36,6 +36,20 @@ userForm.addEventListener("submit", (e) => {
     obj.user = userInput.value;
 });
 
+websocket.addEventListener('message', (event) => {
+    const obj = JSON.parse(event.data);
+
+    switch (obj.type) {
+        case "role":
+            document.getElementById("roleMessage").innerText = `Du är en: ${obj.role === "drawer" ? "Ritare 🎨" : "Gissare 🤔"}`;
+            break;
+        case "chat":
+            renderChatMessage(obj);
+            break;
+    }
+});
+
+
 messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -111,3 +125,4 @@ websocket.onmessage = function(event) {
       ctx.moveTo(data.x, data.y);
     }
   };
+

@@ -20,7 +20,7 @@ wss.on('connection', (ws) => {
     console.log(`new client connection, number of clients: ${wss.clients.size}`);
     
     if (drawer === null) {
-        drawer = ws; // Första spelaren som ansluter blir ritare
+        drawer = ws; // Första spelaren blir ritare
         ws.send(JSON.stringify({ type: "role", role: "drawer" }));
     } else {
         ws.send(JSON.stringify({ type: "role", role: "guesser" }));
@@ -39,11 +39,11 @@ wss.on('connection', (ws) => {
         
         switch (obj.type) {
             case "draw":
-                broadcast(wss, obj);
+                broadcast(obj);
                 break;
             case "chat":
                 console.log(`${obj.datetime}: ${obj.user} säger ${obj.message}`);
-                broadcast(wss, obj);
+                broadcast(obj);
                 break;
             default:
                 break;
@@ -60,9 +60,11 @@ function assignNewDrawer() {
     });
 }
 
-function broadcast(wss, obj) {
+function broadcast(obj) {
     wss.clients.forEach(client => {
-        client.send(JSON.stringify(obj));
+        if (client.readyState === 1) { // Kolla att anslutningen är öppen
+            client.send(JSON.stringify(obj));
+        }
     });
 }
 

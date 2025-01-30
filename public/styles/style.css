@@ -93,3 +93,11 @@ canvas {
     border-radius: 6px;
     border-color: wheat;
 }
+
+#roleMessage {
+    color: var(--white);
+    padding: 1rem;
+    text-align: center;
+    margin-top: 1rem;
+
+}
