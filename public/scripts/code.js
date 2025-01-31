@@ -1,128 +1,86 @@
 // DOM elements
-// ------------------------------------------------------------
 const userForm = document.querySelector("#userForm");
 const messageForm = document.querySelector("#messageForm");
-const chat = document.querySelector("#chat");
+const clue = document.querySelector("#clue");
 const userInput = document.querySelector("#user");
 const messageInput = document.querySelector("#message");
-// const canvas = document.querySelector("canvas");
+
+// Canvas setup
+const canvas = document.getElementById("drawingCanvas");
+const ctx = canvas.getContext("2d");
 
 // WebSocket
 const websocket = new WebSocket("ws://localhost:8082");
 
-// deklarera objektet som ligger till grund för socket meddelanden
+// Deklarera objektet som ligger till grund för socket-meddelanden
 let obj = {};
-const fps = 20;
-let frames = 0;
 let runGame = false;
 
-// event listeners
-// ------------------------------------------------------------
+// Event listeners
 userForm.addEventListener("submit", (e) => {
     e.preventDefault();
-
-    // när en användare har angett sitt namn så kan spelet köras...
     runGame = true;
-
-    // användaren ska inte kunna ändra sitt namn...
     userInput.setAttribute("disabled", true);
-
-    // visa formulär för att skriva text, ta bort klassen 'hidden'
-    messageForm.classList = "";
-
-    // gör fältet för att skriva meddelande aktivt
+    messageForm.classList.remove("hidden");
     messageInput.focus();
-
     obj.user = userInput.value;
 });
 
-websocket.addEventListener('message', (event) => {
-    const obj = JSON.parse(event.data);
+messageForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    obj.type = "clue";
+    obj.message = messageInput.value;
+    obj.datetime = new Date().toLocaleTimeString("sv");
+    
+    messageInput.value = "";
+    
+    renderChatMessage(obj);
+    websocket.send(JSON.stringify(obj));
+});
 
+// WebSocket-meddelanden
+websocket.addEventListener("message", (event) => {
+    const obj = JSON.parse(event.data);
+    
     switch (obj.type) {
         case "role":
             document.getElementById("roleMessage").innerText = `Du är en: ${obj.role === "drawer" ? "Ritare 🎨" : "Gissare 🤔"}`;
             break;
-        case "chat":
+        case "clue":
             renderChatMessage(obj);
+            break;
+        case "draw":
+            drawOnCanvas(obj);
             break;
     }
 });
 
-
-messageForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    // ange obj property type
-    obj.type = "chat";
-
-    obj.message = messageInput.value;
-
-    // ange ev tidszon för landet 
-    obj.datetime = new Date().toLocaleTimeString("sv");
-
-    // radera innehållet i input fältet
-    messageInput.value = "";
-
-    // anropa funktion för att uppdatera chat historik
-    renderChatMessage(obj);
-
-    // skicka objekt till servern via wesocket
-    websocket.send(JSON.stringify(obj));
-});
-
-websocket.addEventListener('message', (event) => {
-
-    console.log("event", event);
-
-    // event.data innehållet det objekt som skickats
-    const obj = JSON.parse(event.data);
-
-    // se till att alla meddelanden som sänds via websocket 
-    // kan kontrolleras via en property med namnet 'type'
-
-    switch (obj.type) {
-
-        case "chat":
-            renderChatMessage(obj);
-            break;
-    }
-
-});
-
-// chat -> ledtrådar
+// Rendera chattmeddelande utan dubbletter
 function renderChatMessage(obj) {
+    const existingMessages = [...clue.querySelectorAll("p")].map(p => p.innerText);
+    const messageText = `${obj.user}: ${obj.message} (${obj.datetime})`;
 
-    // obj example: {message: "Lorem ipsum", user: ""}
+    if (existingMessages.includes(messageText)) {
+        return; // Undvik dubbletter
+    }
+
     const div = document.createElement("div");
     const p = document.createElement("p");
-    // p.textContent = obj.message + " " + obj.datetime;
-    // \n anger en manuell radbrytning - funkar med metoden innerText
-    p.innerText = obj.message + "\n" + obj.datetime;
-
-    // ev innerHTML ... eller ett passande html element
-
-    const span = document.createElement("span");
-    span.textContent = obj.user;
-
+    p.innerText = messageText;
+    
     div.appendChild(p);
-    div.appendChild(span);
-    // appendChild placerar elementet sist...
-    // chat.appendChild(div);
-    // vilken metod kan användas för att placera element först...
-    chat.prepend(div);
+    clue.prepend(div);
 }
 
-websocket.onmessage = function(event) {
-    let data = JSON.parse(event.data);
-  
-    if (data.type === "draw") {
-      ctx.lineWidth = 3;
-      ctx.lineCap = 'round';
-      ctx.lineTo(data.x, data.y);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(data.x, data.y);
-    }
-  };
+// Rita på canvas
+function drawOnCanvas(data) {
+    if (!ctx) return; // Förhindra krasch om canvas saknas
 
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.lineTo(data.x, data.y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(data.x, data.y);
+}

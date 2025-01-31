@@ -2,6 +2,8 @@ import express from 'express';
 import http from 'http';
 import { WebSocketServer } from 'ws';
 
+// app.use(express.static('public'));
+
 const app = express();
 const PORT = 8082;
 app.use(express.static("public"));
@@ -41,7 +43,7 @@ wss.on('connection', (ws) => {
             case "draw":
                 broadcast(obj);
                 break;
-            case "chat":
+            case "clue":
                 console.log(`${obj.datetime}: ${obj.user} säger ${obj.message}`);
                 broadcast(obj);
                 break;

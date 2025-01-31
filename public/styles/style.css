@@ -13,7 +13,21 @@ body {
     font-family: "Poppins", serif;
     font-weight: 900;
     font-style: normal;
+    /* background-color: var(--green); */
+}
+
+.background {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw; 
+    height: 100vh;
     background-color: var(--green);
+    /* background-image: url('http://localhost:8082/public/img/happyducks.jpg'); */
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
+    z-index: -1; 
 }
 
 .start-box {
@@ -40,13 +54,16 @@ label {
     color: var(--white)
 }
 
-div#chat {
+div#clue {
     min-height: 5rem;
-    background-color: lightcoral;
-    color: white;
-    margin: 2rem 0;
+    background-color: var(--pink);
+    color: var(--white);
     padding: 1rem;
-    border: 1px dotted #eee;
+    margin: 2rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+
 }
 
 form {
@@ -94,10 +111,65 @@ canvas {
     border-color: wheat;
 }
 
+.btn {
+    border-radius: 10px;
+    background-color: var(--red);
+    color: var(--white);
+    padding: 1rem;
+    margin: 1rem;
+    font-family: "Poppins", serif;
+    font-weight: 900;
+    font-style: normal;
+}
+.playername {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.resetGame {
+    padding: 1rem;
+    margin: 1rem;
+    font-family: "Poppins", serif;
+    font-weight: 500;
+    font-style: normal;
+    text-decoration: underline;
+    text-align: center;
+}
+
+a {
+    color: var(--red);
+}
+
+#thinstyle {
+    font-size: 14px;
+    font-weight: 300;
+
+}
 #roleMessage {
     color: var(--white);
     padding: 1rem;
     text-align: center;
     margin-top: 1rem;
 
+}
+
+.flexbox {
+    display: flex;
+    
+}
+
+.box#guess {
+background-color: var(--pink);
+}
+
+.box#clue {
+    background-color: var(--white);
+}
+
+.name-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
