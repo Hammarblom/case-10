@@ -20,6 +20,23 @@
         <p>Ange ditt namn för att starta spelet. Du ritar eller gissar. Gissa i chatten, har du rätt vinner du.</p>
     </div>
 
+    <div class="name-box">
+        <form action="" id="userForm">
+            <div class="box">
+                <div class="playername">
+                    <label for="user" id="user">Hej, vad heter du?</label>
+                    <input type="text" id="user" name="user" required>
+                </div>
+                <div class="flexbox">
+                </div>
+                <div class="box">
+                    <input type="submit" value="Nu spelar vi Duck Doodle!" class="btn">
+                </div>
+            </div>
+        </form>
+    </div>
+
+
     <div id="roleMessage"></div>
 
 
@@ -27,46 +44,32 @@
     <canvas id="drawingCanvas" height="450" width="850"></canvas>
 
 
-<div class="name-box">
-    <form action="" id="userForm">
-            <div class="box">
-        <div class="playername">
-        <label for="user">Hej, vad heter du?</label>
-        <input type="text" id="user" name="user" required>
-    </div>
-        <div class="flexbox">
-        </div>
-        <div class="box">
-        <input type="submit" value="Nu spelar vi Duck Doodle!" class="btn">
-    </div>
-    </div>
-    </form>
-</div>
 
-<div class="flexbox">
-    <!-- <div id="guess" class="box"> -->
+    <div class="flexbox">
+        <!-- <div id="guess" class="box"> -->
         <!-- <form action="" class="hidden" id="messageForm">
             <label for="message">Är det...</label> -->
-            <!-- <p>gissning</p> 
+        <!-- <p>gissning</p> 
         </form> -->
 
     </div>
     <div class="box">
-    <div id="clue">
-        <form action="" class="hidden" id="messageForm">
-            <label for="message">Här kan du skriva med dina kompisar 🦢</label>
-            <p id="thinstyle">Är du en gissare? Du gissar du vad din kompis har ritat. Är du en ritare, då kan du ge din kompis lite ledtrådar.</p>
-            <input type="text" id="message" name="message" required>
-            <input type="submit" value="Skicka till din kompis" class="btn">
-        </form>
-    
+        <div id="clue">
+            <form action="" class="hidden" id="messageForm">
+                <label for="message">Här kan du skriva med dina kompisar 🦢</label>
+                <p id="thinstyle">Är du en gissare? Du gissar du vad din kompis har ritat. Är du en ritare, då kan du ge
+                    din kompis lite ledtrådar.</p>
+                <input type="text" id="message" name="message" required>
+                <input type="submit" value="Skicka till din kompis" class="btn">
+            </form>
+
+        </div>
     </div>
-</div>
-</div>
+    </div>
 
 
-<div class="resetGame">
-    <a href="#">Om du klickar här kan du starta om spelet!</a>
+    <div class="resetGame">
+        <button id="resetButton" class="btn">Starta om spelet</button>
     </div>
     
     <!-- om import av moduler som används  -->

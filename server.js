@@ -2,11 +2,10 @@ import express from 'express';
 import http from 'http';
 import { WebSocketServer } from 'ws';
 
-// app.use(express.static('public'));
-
 const app = express();
 const PORT = 8082;
 app.use(express.static("public"));
+
 const server = http.createServer(app);
 const wss = new WebSocketServer({ noServer: true });
 
@@ -19,7 +18,7 @@ server.on('upgrade', (req, socket, head) => {
 });
 
 wss.on('connection', (ws) => {
-    console.log(`new client connection, number of clients: ${wss.clients.size}`);
+    console.log(`New client connected, number of clients: ${wss.clients.size}`);
     
     if (drawer === null) {
         drawer = ws; // Första spelaren blir ritare
@@ -29,9 +28,9 @@ wss.on('connection', (ws) => {
     }
     
     ws.on('close', () => {
-        console.log(`client left..., number of clients: ${wss.clients.size}`);
+        console.log(`Client left, number of clients: ${wss.clients.size}`);
         if (ws === drawer) {
-            drawer = null; // Om ritaren lämnar, tillåt ny ritare
+            drawer = null; // Om ritaren lämnar, välj en ny
             assignNewDrawer();
         }
     });
@@ -47,21 +46,28 @@ wss.on('connection', (ws) => {
                 console.log(`${obj.datetime}: ${obj.user} säger ${obj.message}`);
                 broadcast(obj);
                 break;
+            case "reset":  // RESET FUNKTIONEN
+                drawer = null; // Nollställ ritaren
+                assignNewDrawer();
+                broadcast({ type: "reset" }); // Skicka reset-meddelande till alla klienter
+                break;
             default:
                 break;
         }
     });
 });
 
+// Välj en ny ritare om den gamla lämnar
 function assignNewDrawer() {
     wss.clients.forEach(client => {
-        if (drawer === null) {
+        if (drawer === null && client.readyState === 1) { // Kontrollera om klienten är aktiv
             drawer = client;
             client.send(JSON.stringify({ type: "role", role: "drawer" }));
         }
     });
 }
 
+// Skickar ett meddelande till alla aktiva klienter
 function broadcast(obj) {
     wss.clients.forEach(client => {
         if (client.readyState === 1) { // Kolla att anslutningen är öppen
@@ -71,5 +77,5 @@ function broadcast(obj) {
 }
 
 server.listen(PORT, () => {
-    console.log(`server listening on port ${PORT}`);
+    console.log(`Server listening on port ${PORT}`);
 });

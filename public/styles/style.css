@@ -6,14 +6,13 @@
     --pink: #E89C9E;
     --yellow: #F4BA2D;
     --white: #FFFCF3;
-
+    --green-light: #badba5;
 }
 
 body {
     font-family: "Poppins", serif;
     font-weight: 900;
     font-style: normal;
-    /* background-color: var(--green); */
 }
 
 .background {
@@ -22,7 +21,7 @@ body {
     left: 0;
     width: 100vw; 
     height: 100vh;
-    background-color: var(--green);
+    background-color: var(--white);
     /* background-image: url('http://localhost:8082/public/img/happyducks.jpg'); */
     background-size: cover;
     background-position: center; 
@@ -31,9 +30,9 @@ body {
 }
 
 .start-box {
-    color: var(--white);
+    color: var(--red);
     text-align: center;
-
+    font-weight: 400;
 }
 
 .chat-box {
@@ -44,6 +43,15 @@ body {
     text-align: center;
     margin-top: 1rem;
 }
+
+#user {
+    color: var(--red);
+}
+
+h1 {
+    color: var(--green);
+}
+
 
 .logo {
     height: 150px;
@@ -75,7 +83,7 @@ form {
 }
 
 input {
-    padding: .5rem
+    padding: .5rem;
 }
 
 canvas {
@@ -148,7 +156,7 @@ a {
 
 }
 #roleMessage {
-    color: var(--white);
+    color: var(--red);
     padding: 1rem;
     text-align: center;
     margin-top: 1rem;
@@ -166,6 +174,8 @@ background-color: var(--pink);
 
 .box#clue {
     background-color: var(--white);
+    height:450;
+    width:850;
 }
 
 .name-box {

@@ -84,3 +84,23 @@ function drawOnCanvas(data) {
     ctx.beginPath();
     ctx.moveTo(data.x, data.y);
 }
+
+const resetButton = document.getElementById("resetButton");
+
+resetButton.addEventListener("click", () => {
+    // Rensa canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Rensa användarnamn och tillstånd
+    userInput.removeAttribute("disabled");
+    userInput.value = "";
+    messageForm.classList.add("hidden");
+    messageInput.value = "";
+    document.getElementById("roleMessage").innerText = "";
+    
+    // Skicka en reset-signal till servern om det behövs
+    websocket.send(JSON.stringify({ type: "reset" }));
+
+    // Ladda om sidan om du vill starta om helt
+    // location.reload();
+});
