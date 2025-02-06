@@ -56,7 +56,7 @@ websocket.addEventListener("message", (event) => {
     }
 });
 
-// Rendera chattmeddelande utan dubbletter
+// Rendera chattmeddelande
 function renderChatMessage(obj) {
     const existingMessages = [...clue.querySelectorAll("p")].map(p => p.innerText);
     const messageText = `${obj.user}: ${obj.message} (${obj.datetime})`;

@@ -1,7 +1,7 @@
 const canvas = document.getElementById('drawingCanvas');
 const ctx = canvas.getContext('2d');
 let isDrawing = false;
-let role = null; // Uppdateras från servern!
+let role = null; // Uppdateras från servern
 const websocket = new WebSocket("ws://localhost:8082");
 
 websocket.onmessage = function(event) {

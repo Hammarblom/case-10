@@ -43,7 +43,7 @@ wss.on('connection', (ws) => {
                 broadcast(obj);
                 break;
             case "clue":
-                console.log(`${obj.datetime}: ${obj.user} säger ${obj.message}`);
+                console.log(`${obj.user} säger: ${obj.message}`);
                 broadcast(obj);
                 break;
             case "reset":  // RESET FUNKTIONEN
@@ -69,9 +69,12 @@ function assignNewDrawer() {
 
 // Skickar ett meddelande till alla aktiva klienter
 function broadcast(obj) {
+    // Skapa en kopia av objektet utan datetime
+    const { datetime, ...filteredObj } = obj;
+
     wss.clients.forEach(client => {
         if (client.readyState === 1) { // Kolla att anslutningen är öppen
-            client.send(JSON.stringify(obj));
+            client.send(JSON.stringify(filteredObj));
         }
     });
 }
